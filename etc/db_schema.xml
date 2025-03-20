@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="custom_order_processing_logger" resource="default" engine="innodb"
+           comment="custom order processing logger">
+        <column xsi:type="int" name="id" padding="7" unsigned="false" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="varchar" name="order_id" nullable="false" length="12" comment="Order ID"/>
+        <column xsi:type="varchar" name="old_status" nullable="false" length="30" comment="Old Order Status"/>
+        <column xsi:type="varchar" name="current_status" nullable="false" length="30"
+                comment="New/Current Order Status"/>
+        <column xsi:type="datetime" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false"
+                comment="Created Date"/>
+        <column xsi:type="datetime" name="updated_at" nullable="true" default="CURRENT_TIMESTAMP" on_update="true"
+                comment="Updated Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="CUSTOM_ORDER_PROCESSING_LOGGER_ID" indexType="btree">
+            <column name="id"/>
+        </index>
+    </table>
+</schema>

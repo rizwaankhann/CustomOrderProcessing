@@ -1,0 +1,21 @@
+{
+    "name": "smart-working/module-custom-order-processing",
+    "version": "1.0.0",
+    "description": "Custom Module for updating order status via Magento API and db logger for the same.",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "*",
+        "magento/module-backend": "*",
+        "magento/module-config": "*",
+        "magento/module-store": "*",
+        "magento/module-email": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "SmartWorking\\CustomOrderProcessing\\": ""
+        }
+    }
+}

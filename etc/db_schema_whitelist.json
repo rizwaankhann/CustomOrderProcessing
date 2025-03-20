@@ -1,0 +1,18 @@
+{
+    "custom_order_processing_logger": {
+        "column": {
+            "id": true,
+            "order_id": true,
+            "old_status": true,
+            "current_status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "CUSTOM_ORDER_PROCESSING_LOGGER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

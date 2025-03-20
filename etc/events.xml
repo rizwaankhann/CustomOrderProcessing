@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!--  due to some reason sales_order_save_after not triggering sometime when order status updates so I'm using this event -->
+    <event name="sales_order_save_commit_after">
+        <observer name="smartworking_customorderprocessing_order_status_change"
+                  instance="SmartWorking\CustomOrderProcessing\Observer\OrderStatusChangeObserver"/>
+    </event>
+</config>
