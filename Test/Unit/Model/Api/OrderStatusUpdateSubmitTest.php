@@ -5,6 +5,7 @@ namespace SmartWorking\CustomOrderProcessing\Test\Unit\Model\Api;
 
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Config as OrderConfig;
@@ -20,6 +21,7 @@ class OrderStatusUpdateSubmitTest extends TestCase
     private \PHPUnit\Framework\MockObject\MockObject|CacheInterface $cacheMock;
     private LoggerInterface|\PHPUnit\Framework\MockObject\MockObject $loggerMock;
     private Order|\PHPUnit\Framework\MockObject\MockObject $orderMock;
+    private RemoteAddress|\PHPUnit\Framework\MockObject\MockObject $remoteAddressMock;
 
     public function testFeatureDisabled()
     {
@@ -112,12 +114,14 @@ class OrderStatusUpdateSubmitTest extends TestCase
         $this->cacheMock = $this->createMock(CacheInterface::class);
         $this->loggerMock = $this->createMock(LoggerInterface::class);
         $this->orderMock = $this->createMock(Order::class);
+        $this->remoteAddressMock = $this->createMock(RemoteAddress::class);
 
         $this->orderStatusUpdateSubmit = new OrderStatusUpdateSubmit(
             $this->scopeConfigMock,
             $this->orderRepositoryMock,
             $this->loggerMock,
-            $this->cacheMock
+            $this->cacheMock,
+            $this->remoteAddressMock
         );
 
         // here I mocked the OrderConfig because If getConfig() is not mocked, it returns null

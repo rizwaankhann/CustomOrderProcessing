@@ -13,6 +13,7 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Store\Model\ScopeInterface;
 use Psr\Log\LoggerInterface;
 use SmartWorking\CustomOrderProcessing\Api\OrderStatusUpdateSubmitInterface;
+use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 
 class OrderStatusUpdateSubmit implements OrderStatusUpdateSubmitInterface
 {
@@ -25,23 +26,27 @@ class OrderStatusUpdateSubmit implements OrderStatusUpdateSubmitInterface
     private OrderRepositoryInterface $orderRepository;
     private LoggerInterface $logger;
     private CacheInterface $cache;
+    private RemoteAddress $remoteAddress;
 
     /**
      * @param ScopeConfigInterface $scopeConfigInterface
      * @param OrderRepositoryInterface $orderRepository
      * @param LoggerInterface $logger
      * @param CacheInterface $cache
+     * @param RemoteAddress $remoteAddress
      */
     public function __construct(
         ScopeConfigInterface $scopeConfigInterface,
         OrderRepositoryInterface $orderRepository,
         LoggerInterface $logger,
-        CacheInterface $cache
+        CacheInterface $cache,
+        RemoteAddress $remoteAddress
     ) {
         $this->scopeConfigInterface = $scopeConfigInterface;
         $this->orderRepository = $orderRepository;
         $this->logger = $logger;
         $this->cache = $cache;
+        $this->remoteAddress = $remoteAddress;
     }
 
     /**
@@ -62,11 +67,13 @@ class OrderStatusUpdateSubmit implements OrderStatusUpdateSubmitInterface
                     throw new LocalizedException(__('Order does not exist.'));
                 }
                 $newState = $this->getStateForCurrentOrderStatus($order, $newOrderStatus);
-
                 // this will prevent the order status update restriction under 30 seconds and this value is configurable in store configuration.
+                // added storeId and ip address also in cacheKey for better cache management based on user
                 $orderStatusChangeLifetime = $this->scopeConfigInterface->getValue(self::XML_PATH_CUSTOM_ORDER_STATUS_CHANGE_LIFETIME,
                     ScopeInterface::SCOPE_STORE);
-                $cacheKey = 'api_order_status_change_' . $orderId;
+                $storeId = $order->getStoreId();
+                $ipAddress = $this->remoteAddress->getRemoteAddress();
+                $cacheKey = 'api_order_status_change_' . $orderId.'_'.$storeId.'_'.$ipAddress;
                 if ($this->cache->load($cacheKey)) {
                     throw new LocalizedException(__('We have received too many requests for this order for change status. Please wait for sometime.'));
                 }
