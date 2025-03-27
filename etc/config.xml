@@ -5,6 +5,7 @@
         <smartworking_general_config>
             <general>
                 <enable>1</enable>
+                <change_lifetime>30</change_lifetime>
             </general>
         </smartworking_general_config>
     </default>

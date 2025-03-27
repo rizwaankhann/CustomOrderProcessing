@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="SmartWorking_CustomOrderProcessing::order_status" title="SmartWorking"
+             module="SmartWorking_CustomOrderProcessing" sortOrder="10"
+             resource="SmartWorking_CustomOrderProcessing::order_status"/>
+        <add id="SmartWorking_CustomOrderProcessing::order_status_listing" title="Order Status Change Logs"
+             module="SmartWorking_CustomOrderProcessing"
+             sortOrder="10"
+             parent="SmartWorking_CustomOrderProcessing::order_status"
+             action="smartworking/orderstatus/listing"
+             resource="SmartWorking_CustomOrderProcessing::order_status_listing"/>
+    </menu>
+</config>

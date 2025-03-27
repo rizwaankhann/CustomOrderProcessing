@@ -1,6 +1,7 @@
 # SmartWorking_CustomOrderProcessing module
 
 Custom Module for updating order status via Magento API and db logger for the same.
+Please check bottom of readme file to see latest changes pushed/done
 
 ## Module Overview
     The module introduces the following features:
@@ -80,8 +81,18 @@ Custom Module for updating order status via Magento API and db logger for the sa
 
     Path: Store-> Configuration-> Smart Working-> General Configuration For Custom Order Update-> Enable Custom Order Status Update Functionality -> Yes/No 
 
-## Future Enhancement 
-    Create a backend ui component grid to view logs in magento admin.
+## Future Enhancement  
+    Cover more unit tests for API and observer,
+    Create a backend ui component grid to view logs in magento admin. [Done]
+
+## Added Ui-Component Grid in backend in SmartWorking -> Order Status Change Logs with magento standard.
+
+## Enhanced the validation for the webapi for different scenerios. 
+
+## Added UNIT test coverage scenerios, please run below commands to execute this module specific  unit test cases
+    Navigate to your project root directory from terminal.
+    Go to               cd dev/tests/unit/
+    Run Unit Test       ../../../vendor/bin/phpunit -c phpunit.xml.dist ../../../app/code/SmartWorking/CustomOrderProcessing/Test/Unit/Model/Api/OrderStatusUpdateSubmitTest.php
 
     
 

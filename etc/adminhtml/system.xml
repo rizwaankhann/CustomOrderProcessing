@@ -19,6 +19,14 @@
                     <label>Enable Custom Order Status Update Functionality</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="change_lifetime" translate="label" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Order Status Change Lifetime</label>
+                    <comment>The value should be in seconds.</comment>
+                    <depends>
+                        <field id="smartworking_general_config/general/enable">1</field>
+                    </depends>
+                </field>
             </group>
         </section>
     </system>

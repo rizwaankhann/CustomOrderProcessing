@@ -1,0 +1,3 @@
+.admin__menu li.item-order-status > a:before {
+    content: '\e621';
+}

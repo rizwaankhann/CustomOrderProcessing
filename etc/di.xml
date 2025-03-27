@@ -5,4 +5,27 @@
     <!--    preference for interface and webapi implementation -->
     <preference for="SmartWorking\CustomOrderProcessing\Api\OrderStatusUpdateSubmitInterface"
                 type="SmartWorking\CustomOrderProcessing\Model\Api\OrderStatusUpdateSubmit"/>
+
+    <!--  Start UI-component grid datasource and provider-->
+    <virtualType name="SmartWorking\CustomOrderProcessing\Model\ResourceModel\CustomOrderProcessing\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">custom_order_processing_logger</argument>
+            <argument name="resourceModel" xsi:type="string">
+                SmartWorking\CustomOrderProcessing\Model\ResourceModel\CustomOrderProcessing
+            </argument>
+            <argument name="eventPrefix" xsi:type="string">smartworking_orderstatus_listing_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">orderstatus_listing_grid_collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="smartworking_orderstatus_listing_data_source" xsi:type="string">
+                    SmartWorking\CustomOrderProcessing\Model\ResourceModel\CustomOrderProcessing\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!--  End UI-component grid datasource and provider-->
+
 </config>
